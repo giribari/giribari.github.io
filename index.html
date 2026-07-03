@@ -1,280 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIRI & CO.™ | Luxury Jewelry</title>
-    
-    <style>
-        /* Global Settings */
-        body {
-            font-family: "Times New Roman", Times, serif;
-            background-color: #0a0a0a;
-            color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIRI & CO. — The House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital@1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0D0C;
+    --bone:#F5F0E6;
+    --brass:#8A6E3F;
+    --brass-soft:#a5895f;
+    --seal:#B4472A;
+    --charcoal:#3C3A36;
+    --hair: rgba(245,240,230,0.14);
+    --hair-dark: rgba(14,13,12,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--seal);color:var(--bone);}
 
-        /* Navigation Bar & Clock */
-        nav {
-            padding: 20px;
-            background-color: #050505;
-            border-bottom: 1px solid #222;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.035; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 
-        /* Luxury Clock Styling */
-        #clock {
-            color: #d4af37;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            font-family: monospace;
-        }
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--brass);
+    font-weight:400;
+  }
+  .container{max-width:1280px; margin:0 auto; padding:0 6vw;}
 
-        .nav-links a {
-            color: #ccc;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
+  /* ===== NAV ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 6vw;
+    mix-blend-mode:difference;
+    color:var(--bone);
+    transition:padding .4s ease;
+  }
+  nav.scrolled{padding:16px 6vw;}
+  .wordmark{
+    font-family:'Playfair Display',serif;
+    font-size:19px;
+    letter-spacing:0.18em;
+    font-weight:600;
+    color:var(--bone);
+  }
+  .wordmark sup{font-size:9px; letter-spacing:0.1em;}
+  .nav-links{display:flex; gap:44px; list-style:none;}
+  .nav-links a{
+    color:var(--bone); text-decoration:none;
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    font-weight:400;
+    position:relative;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:1px;
+    background:var(--bone); transition:width .35s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-toggle{display:none;}
 
-        .nav-links a:hover {
-            color: #d4af37;
-        }
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    height:100vh; min-height:720px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    background:var(--ink);
+    color:var(--bone);
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(138,110,63,0.16), transparent 70%),
+      linear-gradient(180deg, #0E0D0C 0%, #14120F 60%, #0E0D0C 100%);
+  }
+  .hero-lines{
+    position:absolute; inset:0; opacity:0.5;
+  }
+  .hero-content{position:relative; z-index:2; padding:0 24px;}
+  .hero .eyebrow{
+    color:var(--brass-soft);
+    display:block; margin-bottom:28px;
+    opacity:0; animation:fadeUp 1.1s ease forwards; animation-delay:.2s;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 8vw, 7.2rem);
+    font-weight:500;
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    opacity:0; animation:fadeUp 1.3s ease forwards; animation-delay:.4s;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:400; color:var(--brass-soft);
+  }
+  .hero p{
+    max-width:520px; margin:32px auto 0;
+    font-size:15px; line-height:1.85; color:rgba(245,240,230,0.68);
+    font-weight:300;
+    opacity:0; animation:fadeUp 1.3s ease forwards; animation-delay:.7s;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(22px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .hero-scroll{
+    position:absolute; bottom:40px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    opacity:0; animation:fadeUp 1s ease forwards; animation-delay:1.2s;
+  }
+  .hero-scroll .line{width:1px; height:46px; background:linear-gradient(var(--brass-soft), transparent);}
+  .hero-scroll span{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(245,240,230,0.45);}
 
-        /* Header / Hero Section */
-        header {
-            padding: 60px 20px 40px 20px;
-        }
+  /* ===== MANIFESTO STRIP ===== */
+  .manifesto{
+    background:var(--ink); color:var(--bone);
+    padding:120px 6vw 140px;
+    border-top:1px solid var(--hair);
+  }
+  .manifesto-inner{
+    max-width:900px; margin:0 auto; text-align:center;
+  }
+  .manifesto p{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:clamp(1.5rem, 3vw, 2.3rem);
+    line-height:1.5;
+    font-weight:400;
+    color:rgba(245,240,230,0.92);
+  }
+  .manifesto .attribution{
+    margin-top:36px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--brass);
+    font-style:normal;
+  }
 
-        h1 {
-            font-size: 3.5rem;
-            letter-spacing: 5px;
-            margin: 0;
-            color: #d4af37;
-        }
+  /* ===== SECTION HEADERS ===== */
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    padding:100px 6vw 56px;
+    border-top:1px solid var(--hair-dark);
+    max-width:1280px; margin:0 auto;
+    flex-wrap:wrap; gap:20px;
+  }
+  .section-head h2{
+    font-size:clamp(2rem, 4vw, 3.1rem);
+    font-weight:500; margin-top:14px;
+  }
+  .section-head .count{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; color:var(--charcoal); letter-spacing:0.08em;
+    text-align:right; max-width:280px; line-height:1.7;
+  }
 
-        .trademark {
-            font-size: 1.2rem;
-            vertical-align: super;
-        }
+  /* ===== ARCHIVE / LEDGER ENTRIES ===== */
+  .entry{
+    display:grid; grid-template-columns:1fr 1fr;
+    border-top:1px solid var(--hair-dark);
+    align-items:stretch;
+  }
+  .entry:last-child{border-bottom:1px solid var(--hair-dark);}
+  .entry:nth-child(even) .entry-visual{order:2;}
+  .entry-visual{
+    position:relative;
+    min-height:520px;
+    background:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .entry-visual svg{width:62%; height:auto; opacity:0.95;}
+  .entry-visual .lot{
+    position:absolute; top:28px; left:28px;
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    color:var(--brass-soft); letter-spacing:0.15em;
+  }
+  .entry-visual .status{
+    position:absolute; bottom:28px; left:28px;
+    font-family:'JetBrains Mono',monospace; font-size:10px;
+    letter-spacing:0.15em; text-transform:uppercase;
+    color:rgba(245,240,230,0.55);
+    display:flex; align-items:center; gap:8px;
+  }
+  .entry-visual .status .dot{width:5px; height:5px; border-radius:50%; background:var(--seal);}
+  .entry-copy{
+    padding:80px 5vw;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .entry-copy .eyebrow{margin-bottom:18px;}
+  .entry-copy h3{
+    font-size:clamp(1.7rem, 2.6vw, 2.4rem);
+    font-weight:500; line-height:1.15; margin-bottom:24px;
+  }
+  .entry-copy p{
+    font-size:14.5px; line-height:1.9; color:var(--charcoal); font-weight:300;
+    max-width:440px; margin-bottom:28px;
+  }
+  .entry-meta{
+    display:flex; gap:36px; margin-top:8px; flex-wrap:wrap;
+  }
+  .entry-meta div{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--brass); letter-spacing:0.05em;}
+  .entry-meta div span{display:block; color:var(--ink); font-family:'Inter',sans-serif; font-size:13px; margin-top:4px; letter-spacing:0;}
 
-        .tagline {
-            font-size: 1.2rem;
-            font-style: italic;
-            letter-spacing: 2px;
-            color: #a9a9a9;
-            margin-top: 15px;
-        }
+  /* ===== PHILOSOPHY / PILLARS ===== */
+  .pillars{background:var(--bone); padding-bottom:60px;}
+  .pillars-grid{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    max-width:1280px; margin:0 auto; padding:0 6vw;
+    border-top:1px solid var(--hair-dark);
+  }
+  .pillar{
+    padding:52px 36px 60px 0;
+    border-right:1px solid var(--hair-dark);
+  }
+  .pillar:last-child{border-right:none;}
+  .pillar .num{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--brass); letter-spacing:0.1em;}
+  .pillar h4{
+    font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:500;
+    margin:22px 0 16px;
+  }
+  .pillar p{font-size:13.5px; line-height:1.85; color:var(--charcoal); font-weight:300;}
 
-        /* Products Section */
-        .products-section, .vip-section {
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+  /* ===== COMMISSION / CTA ===== */
+  .commission{
+    background:var(--ink); color:var(--bone);
+    padding:160px 6vw;
+    text-align:center;
+    position:relative;
+    border-top:1px solid var(--hair);
+  }
+  .commission .eyebrow{color:var(--brass-soft); margin-bottom:24px; display:block;}
+  .commission h2{
+    font-size:clamp(2.4rem, 5.5vw, 4.6rem);
+    font-weight:500; line-height:1.08; max-width:900px; margin:0 auto 32px;
+  }
+  .commission h2 em{font-style:italic; color:var(--brass-soft); font-weight:400;}
+  .commission p{
+    max-width:480px; margin:0 auto 48px;
+    font-size:14.5px; line-height:1.9; color:rgba(245,240,230,0.62); font-weight:300;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:14px;
+    padding:18px 38px;
+    border:1px solid var(--brass-soft);
+    color:var(--bone); text-decoration:none;
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:0.2em; text-transform:uppercase;
+    transition:all .4s ease;
+    background:transparent;
+  }
+  .btn:hover{background:var(--brass-soft); color:var(--ink); border-color:var(--brass-soft);}
 
-        h2 {
-            font-size: 2rem;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-            display: inline-block;
-        }
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--bone); color:var(--ink);
+    padding:80px 6vw 40px;
+    border-top:1px solid var(--hair-dark);
+  }
+  .footer-top{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px; padding-bottom:64px;
+  }
+  .footer-brand .wordmark{color:var(--ink); margin-bottom:18px; display:block;}
+  .footer-brand p{font-size:13px; color:var(--charcoal); line-height:1.8; max-width:280px; font-weight:300;}
+  .footer-col h5{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--brass); margin-bottom:20px;
+  }
+  .footer-col a{
+    display:block; color:var(--ink); text-decoration:none;
+    font-size:13.5px; margin-bottom:13px; font-weight:300;
+    transition:color .3s ease;
+  }
+  .footer-col a:hover{color:var(--brass);}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:30px; border-top:1px solid var(--hair-dark);
+    font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    color:var(--charcoal); letter-spacing:0.05em; flex-wrap:wrap; gap:12px;
+  }
 
-        /* Grid for Products (Auto-aligns when you add more) */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
+  /* ===== REVEAL ON SCROLL ===== */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-        /* Text-Only Jewelry Item Card */
-        .jewelry-item {
-            background-color: #111;
-            border: 1px solid #222;
-            padding: 40px 20px; /* Made taller since there are no images */
-            border-radius: 4px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .jewelry-item:hover {
-            transform: translateY(-5px);
-            border-color: #d4af37;
-        }
-
-        .product-name {
-            font-size: 1.5rem;
-            margin: 0 0 15px 0;
-            letter-spacing: 1.5px;
-            color: #fff;
-        }
-
-        .price {
-            display: block;
-            font-size: 1.3rem;
-            color: #d4af37;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-
-        /* Call to Action Button */
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: transparent;
-            color: #d4af37;
-            text-decoration: none;
-            border: 1px solid #d4af37;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #d4af37;
-            color: #0a0a0a;
-        }
-
-        /* VIP Spenders Section Styling */
-        .vip-list {
-            list-style: none;
-            padding: 0;
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: left;
-            font-size: 1.2rem;
-            color: #ccc;
-        }
-
-        .vip-list li {
-            padding: 15px;
-            border-bottom: 1px solid #222;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .vip-list li span:first-child {
-            color: #d4af37;
-            font-weight: bold;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #050505;
-            padding: 40px 20px;
-            border-top: 1px solid #222;
-            margin-top: 60px;
-        }
-
-        .footer-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #aaa;
-        }
-        
-        .discord-highlight {
-            color: #d4af37;
-            font-weight: bold;
-        }
-    </style>
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed; inset:0 0 0 auto; width:78%; height:100vh;
+      background:var(--ink); flex-direction:column; justify-content:center;
+      align-items:flex-start; padding:0 40px; gap:30px;
+      transform:translateX(100%); transition:transform .5s ease; mix-blend-mode:normal;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a{font-size:15px;}
+    .nav-toggle{
+      display:block; background:none; border:none; color:var(--bone);
+      font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.15em;
+      cursor:pointer; z-index:101; mix-blend-mode:difference;
+    }
+    .entry, .footer-top, .pillars-grid{grid-template-columns:1fr;}
+    .entry:nth-child(even) .entry-visual{order:0;}
+    .pillar{border-right:none; border-bottom:1px solid var(--hair-dark); padding:40px 0;}
+    .section-head{flex-direction:column; align-items:flex-start;}
+    .section-head .count{text-align:left;}
+    .footer-top{gap:48px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
 </head>
 <body>
 
-    <!-- Top Navigation & Clock -->
-    <nav>
-        <div id="clock">--:--:--</div>
-        <div class="nav-links">
-            <a href="#collection">The Collection</a>
-            <a href="#vip">Top 10 Spenders</a>
-            <a href="#contact">Bespoke Commissions</a>
-        </div>
-    </nav>
+<div class="grain"></div>
 
-    <!-- Header -->
-    <header>
-        <h1>GIRI &amp; CO.<span class="trademark">&trade;</span></h1>
-        <p class="tagline">Desired by many. Worn by a select few.</p>
-    </header>
+<nav id="nav">
+  <div class="wordmark">GIRI &amp; CO.<sup>™</sup></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#archive">The Archive</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#commission">Commission</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle">MENU</button>
+</nav>
 
-    <!-- Main Content: Products -->
-    <div id="collection" class="products-section">
-        <h2>CURRENT AVAILABLE JEWELRY</h2>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <circle cx="720" cy="450" r="1" fill="none" stroke="rgba(138,110,63,0.25)" stroke-width="0.5"/>
+    <circle cx="720" cy="450" r="220" fill="none" stroke="rgba(138,110,63,0.14)" stroke-width="0.5"/>
+    <circle cx="720" cy="450" r="340" fill="none" stroke="rgba(138,110,63,0.09)" stroke-width="0.5"/>
+    <circle cx="720" cy="450" r="460" fill="none" stroke="rgba(138,110,63,0.05)" stroke-width="0.5"/>
+  </svg>
+  <div class="hero-content">
+    <span class="eyebrow">Est. District 47 — An Independent Maison</span>
+    <h1>Jewelry, made<br><em>to be inherited.</em></h1>
+    <p>GIRI &amp; CO. creates one-of-one works for collectors who understand that true luxury is never repeated. Every piece carries its own provenance, its own history, its own place in a legacy still being written.</p>
+  </div>
+  <div class="hero-scroll">
+    <span>DESCEND</span>
+    <div class="line"></div>
+  </div>
+</section>
 
-        <!-- Product Grid -->
-        <div class="product-grid">
-            
-            <!-- Product 1 -->
-            <div class="jewelry-item">
-                <h3 class="product-name">GIRI &amp; CO.&trade; CR7</h3>
-                <span class="price">$12,500</span>
-                <a href="#" class="cta-button" target="_blank">View on eBay</a>
-            </div>
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-inner reveal">
+    <p>"We do not design collections. We admit ideas into the Archive — and once admitted, they are never repeated."</p>
+    <div class="attribution">— The House, on the Practice of Singularity</div>
+  </div>
+</section>
 
-            <!-- Product 2 -->
-            <div class="jewelry-item">
-                <h3 class="product-name">Signature Signet</h3>
-                <span class="price">$8,200</span>
-                <a href="#" class="cta-button" target="_blank">View on eBay</a>
-            </div>
-            
-            <!-- Product 3 -->
-            <div class="jewelry-item">
-                <h3 class="product-name">Onyx Sovereign</h3>
-                <span class="price">$15,000</span>
-                <a href="#" class="cta-button" target="_blank">View on eBay</a>
-            </div>
-
-            <!-- If you want to add more products, just copy the <div class="jewelry-item"> block and paste it here! -->
-
-        </div>
+<!-- ARCHIVE -->
+<section id="archive">
+  <div class="section-head reveal">
+    <div>
+      <span class="eyebrow">The Archive</span>
+      <h2>Recent Admissions</h2>
     </div>
+    <div class="count">Four works, presented from the current Archive.<br>Each entry is final upon acquisition.</div>
+  </div>
 
-    <!-- Top 10 Spenders Section -->
-    <div id="vip" class="vip-section">
-        <h2>TOP 10 VIP SPENDERS</h2>
-        <ul class="vip-list">
-            <li><span>1. Anonymous</span> <span>$45,000</span></li>
-            <li><span>2. User_Vault</span> <span>$32,500</span></li>
-            <li><span>3. K.D.</span> <span>$28,000</span></li>
-            <li><span>4. EliteBuyer99</span> <span>$15,000</span></li>
-            <li><span>5. [Available]</span> <span>---</span></li>
-            <!-- You can edit these names and amounts manually -->
-        </ul>
+  <!-- Entry 001 -->
+  <div class="entry reveal">
+    <div class="entry-visual">
+      <span class="lot">LOT NO. 047-001</span>
+      <svg viewBox="0 0 200 200" fill="none">
+        <ellipse cx="100" cy="130" rx="52" ry="48" stroke="#8A6E3F" stroke-width="1.2"/>
+        <ellipse cx="100" cy="130" rx="52" ry="48" stroke="#F5F0E6" stroke-width="0.4" opacity="0.3"/>
+        <polygon points="100,58 118,84 100,102 82,84" stroke="#F5F0E6" stroke-width="1" fill="rgba(245,240,230,0.05)"/>
+        <polygon points="100,58 118,84 109,84" fill="rgba(180,71,42,0.55)"/>
+        <line x1="100" y1="58" x2="100" y2="10" stroke="#8A6E3F" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+      <span class="status"><span class="dot"></span>Acquired — Private Collection</span>
     </div>
+    <div class="entry-copy">
+      <span class="eyebrow">Solitaire — The Meridian Cut</span>
+      <h3>A single stone, set to catch only one hour of light.</h3>
+      <p>Cut over eleven months by the House atelier, the Meridian departs from symmetry in favor of a single true facet — oriented, at the collector's request, to align with a specific latitude at dawn. No second stone will ever be cut to this angle.</p>
+      <div class="entry-meta">
+        <div>EDITION<span>One of One</span></div>
+        <div>MATERIAL<span>18k Recycled Gold, Oxide Stone</span></div>
+        <div>ATELIER<span>District 47, Bench Three</span></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Footer: Commissions & Contact -->
-    <footer id="contact">
-        <p class="footer-text">
-            We also do custom commissions to bring your unique vision to life.<br>
-            Please DM me on Discord: <span class="discord-highlight">@supremo</span>
-        </p>
-    </footer>
+  <!-- Entry 002 -->
+  <div class="entry reveal">
+    <div class="entry-visual">
+      <span class="lot">LOT NO. 047-002</span>
+      <svg viewBox="0 0 200 200" fill="none">
+        <path d="M60 140 Q100 60 140 140" stroke="#8A6E3F" stroke-width="1.2"/>
+        <path d="M60 140 Q100 70 140 140" stroke="#F5F0E6" stroke-width="0.4" opacity="0.3"/>
+        <circle cx="100" cy="70" r="6" fill="rgba(180,71,42,0.6)"/>
+        <circle cx="72" cy="128" r="2.5" fill="#F5F0E6" opacity="0.7"/>
+        <circle cx="128" cy="128" r="2.5" fill="#F5F0E6" opacity="0.7"/>
+      </svg>
+      <span class="status"><span class="dot"></span>Held — Available on Inquiry</span>
+    </div>
+    <div class="entry-copy">
+      <span class="eyebrow">The Correspondence Cuff</span>
+      <h3>Engraved on the interior. Read only by the wearer.</h3>
+      <p>Each Correspondence Cuff is bespoke — its interior surface hand-engraved with a private text supplied by the collector, then hidden against the skin. From the exterior, it reads as pure form. Its meaning belongs to one person alone.</p>
+      <div class="entry-meta">
+        <div>EDITION<span>Bespoke Commission</span></div>
+        <div>MATERIAL<span>Sterling Silver, Patina Brass</span></div>
+        <div>ATELIER<span>District 47, Bench One</span></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- JavaScript for the Live Clock -->
-    <script>
-        function updateClock() {
-            const now = new Date();
-            // Gets the local time string (e.g., "9:45:45 PM")
-            const timeString = now.toLocaleTimeString();
-            document.getElementById('clock').textContent = timeString;
-        }
-        
-        // Run the clock update every 1 second (1000 milliseconds)
-        setInterval(updateClock, 1000);
-        updateClock(); // Run immediately so it doesn't wait 1 second to appear
-    </script>
+  <!-- Entry 003 -->
+  <div class="entry reveal">
+    <div class="entry-visual">
+      <span class="lot">LOT NO. 047-003</span>
+      <svg viewBox="0 0 200 200" fill="none">
+        <rect x="70" y="70" width="60" height="60" transform="rotate(45 100 100)" stroke="#8A6E3F" stroke-width="1.2"/>
+        <rect x="82" y="82" width="36" height="36" transform="rotate(45 100 100)" stroke="#F5F0E6" stroke-width="0.4" opacity="0.4"/>
+        <circle cx="100" cy="100" r="4" fill="rgba(180,71,42,0.6)"/>
+      </svg>
+      <span class="status"><span class="dot"></span>Acquired — Private Collection</span>
+    </div>
+    <div class="entry-copy">
+      <span class="eyebrow">Archive Pendant, Series III</span>
+      <h3>The third of a series that will never see a fourth.</h3>
+      <p>The House closed the Series III commission after three works, each cut from the same original stone. What remains of the source material has been retired to the Archive vault, permanently withdrawn from further production.</p>
+      <div class="entry-meta">
+        <div>EDITION<span>3 of 3 — Series Closed</span></div>
+        <div>MATERIAL<span>Platinum, Smoked Quartz</span></div>
+        <div>ATELIER<span>District 47, Bench Two</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="pillars">
+  <div class="section-head reveal">
+    <div>
+      <span class="eyebrow">Philosophy</span>
+      <h2>What We Hold True</h2>
+    </div>
+    <div class="count">The principles that govern every admission into the Archive.</div>
+  </div>
+  <div class="pillars-grid reveal">
+    <div class="pillar">
+      <span class="num">I.</span>
+      <h4>Rarity is a Discipline</h4>
+      <p>We refuse repetition as a matter of practice, not marketing. A design, once realized, is retired from possibility. This is what separates a creation from a product.</p>
+    </div>
+    <div class="pillar">
+      <span class="num">II.</span>
+      <h4>Provenance is Permanent</h4>
+      <p>Every work leaves the atelier with a documented history — materials, maker, date of admission. That record follows the piece for as long as it exists.</p>
+    </div>
+    <div class="pillar">
+      <span class="num">III.</span>
+      <h4>Legacy Outlives Trend</h4>
+      <p>We do not design for a season. A GIRI &amp; CO. piece is built to be passed forward — to a collection, an heir, or an archive not yet imagined.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSION -->
+<section id="commission" class="commission">
+  <span class="eyebrow reveal">Bespoke Commission</span>
+  <h2 class="reveal">Some works are not<br><em>found. They are requested.</em></h2>
+  <p class="reveal">The House accepts a limited number of private commissions each year. Each begins with a conversation, not a catalogue — and ends with a piece that exists nowhere else.</p>
+  <a href="#contact" class="btn reveal">Begin a Commission →</a>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="wordmark">GIRI &amp; CO.™</span>
+      <p>An independent maison building legacy through collectible works of art, one admission to the Archive at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h5>House</h5>
+      <a href="#archive">The Archive</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#commission">Commission</a>
+    </div>
+    <div class="footer-col">
+      <h5>Stewardship</h5>
+      <a href="#">Provenance Registry</a>
+      <a href="#">Authentication</a>
+      <a href="#">Care of a Creation</a>
+    </div>
+    <div class="footer-col">
+      <h5>Correspondence</h5>
+      <a href="mailto:archive@giriandco.com">archive@giriandco.com</a>
+      <a href="#">By Private Appointment</a>
+      <a href="#">District 47</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 GIRI &amp; CO. — All Works Reserved.</span>
+    <span>EVERY CREATION, ONCE ADMITTED, IS NEVER REPEATED.</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
+    toggle.textContent = links.classList.contains('open') ? 'CLOSE' : 'MENU';
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.textContent = 'MENU';
+  }));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
